@@ -1,20 +1,17 @@
 package com.talaba.zakhirah
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import com.talaba.zakhirah.databinding.ActivityMainBinding
 import com.talaba.zakhirah.databinding.ActivitySignupBinding
 import com.talaba.zakhirah.models.User
-import java.sql.Date
-import java.sql.Time
 import java.time.LocalDateTime
 
 class SignupActivity : AppCompatActivity() {
@@ -22,6 +19,7 @@ class SignupActivity : AppCompatActivity() {
     lateinit var auth:FirebaseAuth
     lateinit var database: FirebaseDatabase
     lateinit var storage: FirebaseStorage
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
@@ -37,7 +35,7 @@ class SignupActivity : AppCompatActivity() {
                     .addOnSuccessListener {
                         var user =
                             User(binding.signupUsername.text.toString(),binding.signupEmail.text.toString(),Integer.parseInt(binding.signupPhone.text.toString()),binding.signupConfirmPassword.text.toString(),binding.signupState.selectedItem.toString(),
-                                LocalDateTime.now())
+                               LocalDateTime.now())
                         database.reference.child("users")
                             .child(FirebaseAuth.getInstance().uid.toString()).setValue(user)
                             .addOnSuccessListener {

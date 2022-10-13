@@ -1,5 +1,6 @@
 package com.talaba.zakhirah.models
 
+import java.time.LocalDateTime
 import kotlin.properties.Delegates
 
 class User {
@@ -8,7 +9,7 @@ class User {
     var user_phone by Delegates.notNull<Int>()
     lateinit var user_password : String
     lateinit var user_state : String
-    var user_creation_time : Long = 0
+    lateinit var user_creation_time : LocalDateTime
     constructor()
     constructor(
         user_username: String,
@@ -16,7 +17,7 @@ class User {
         user_phone: Int,
         user_password: String,
         user_state: String,
-        user_creation_time: Long
+        user_creation_time: LocalDateTime
     ) {
         this.user_username = user_username
         this.user_email = user_email
