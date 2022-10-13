@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:title="Upload your kitab">
+<item android:title="Upload your kitab"
+    android:id="@+id/menu_upload">
 
 </item>
 </menu>
