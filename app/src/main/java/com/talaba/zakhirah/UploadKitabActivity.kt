@@ -14,7 +14,7 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.talaba.zakhirah.databinding.ActivityUploadKitabBinding
 import com.talaba.zakhirah.models.Kitab
-import java.io.File
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.util.*
 
@@ -51,16 +51,18 @@ class UploadKitabActivity : AppCompatActivity() {
                 // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
                 riversRef.downloadUrl.addOnSuccessListener{uri ->
                     if (!binding.uploadKitabName.text.isEmpty()){
+                        val date = Date()
                         var kitab = Kitab(binding.uploadKitabName.text.toString(),
                             binding.uploadKitabDescription.text.toString(),
                             FirebaseAuth.getInstance().uid.toString(),
                             uri.toString(),
-                            LocalDateTime.now(),
+                            date.time,
                             binding.uploadKitabLanguage.text.toString(),
                             false)
                         database.reference.child("kitab").child(database.reference.push().key.toString()).setValue(kitab)
                             .addOnSuccessListener {
                                 Toast.makeText(this,"Kitab Uploaded for processing...",Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(applicationContext,MainActivity::class.java))
                             }
                     }
                     else{

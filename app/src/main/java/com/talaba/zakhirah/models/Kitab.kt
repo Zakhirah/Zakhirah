@@ -1,13 +1,14 @@
 package com.talaba.zakhirah.models
 
 import java.time.LocalDateTime
+import kotlin.properties.Delegates
 
 class Kitab {
     lateinit var kitab_name : String
     lateinit var kitab_description : String
     lateinit var kitab_author : String
     lateinit var kitab_url : String
-    lateinit var kitab_upload_time : LocalDateTime
+    var kitab_upload_time by Delegates.notNull<Long>()
     lateinit var kitab_language : String
     var kitab_permission : Boolean = false
 
@@ -17,7 +18,7 @@ class Kitab {
         kitab_description: String,
         kitab_author: String,
         kitab_url: String,
-        kitab_upload_time: LocalDateTime,
+        kitab_upload_time: Long,
         kitab_language: String,
         kitab_permission: Boolean
     ) {
