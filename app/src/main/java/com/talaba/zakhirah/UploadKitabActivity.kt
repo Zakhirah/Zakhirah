@@ -28,6 +28,7 @@ class UploadKitabActivity : AppCompatActivity() {
         setContentView(binding.root)
         database = FirebaseDatabase.getInstance()
         storage = FirebaseStorage.getInstance()
+        reference = FirebaseStorage.getInstance().reference
         binding.uploadKitabUrl.setOnClickListener{
             val intent = Intent()
             intent.action = Intent.ACTION_GET_CONTENT
@@ -35,7 +36,7 @@ class UploadKitabActivity : AppCompatActivity() {
             startActivityForResult(intent, 101)
         }
         binding.uploadKitabUpload.setOnClickListener{
-            reference.child("kitab_pdf").putFile(Uri.parse(upload_kitab_url)).
+            reference.child("kitab_pdf").child(binding.uploadKitabName.text.toString()+FirebaseAuth.getInstance().uid).putFile(Uri.parse(upload_kitab_url)).
             addOnSuccessListener {
                 upload_kitab_url = reference.downloadUrl.toString()
             }
@@ -56,7 +57,11 @@ class UploadKitabActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == 101 && requestCode == RESULT_OK) {
+            if (data != null) {
+                upload_kitab_url = data.data.toString()
+            }
+        }
         super.onActivityResult(requestCode, resultCode, data)
-        upload_kitab_url = data.toString()
     }
 }
