@@ -11,16 +11,19 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import com.talaba.zakhirah.databinding.ActivityUploadKitabBinding
 import com.talaba.zakhirah.models.Kitab
+import java.io.File
 import java.time.LocalDateTime
+import java.util.*
 
 class UploadKitabActivity : AppCompatActivity() {
     lateinit var binding: ActivityUploadKitabBinding
     lateinit var database:FirebaseDatabase
     lateinit var storage:FirebaseStorage
     lateinit var reference:StorageReference
-    lateinit var upload_kitab_url : String
+    lateinit var upload_kitab_url :Uri
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,32 +39,43 @@ class UploadKitabActivity : AppCompatActivity() {
             startActivityForResult(intent, 101)
         }
         binding.uploadKitabUpload.setOnClickListener{
-            reference.child("kitab_pdf").child(binding.uploadKitabName.text.toString()+FirebaseAuth.getInstance().uid).putFile(Uri.parse(upload_kitab_url)).
-            addOnSuccessListener {
-                upload_kitab_url = reference.downloadUrl.toString()
-            }
-            if (!binding.uploadKitabName.text.isEmpty() && !upload_kitab_url.isEmpty()){
-                var kitab = Kitab(binding.uploadKitabName.text.toString(),
-                    binding.uploadKitabDescription.text.toString(),
-                    FirebaseAuth.getInstance().uid.toString(),
-                    upload_kitab_url,
-                    LocalDateTime.now(),
-                    binding.uploadKitabLanguage.text.toString(),
-                    false)
-                database.reference.child("kitab").child(database.reference.push().key.toString()).setValue(kitab)
-            }
-            else{
-                Toast.makeText(this,"Kitab name is required...",Toast.LENGTH_SHORT).show()
+            var uploadTask : UploadTask
+            var storageRef : StorageReference = FirebaseStorage.getInstance().getReference()
+            var file = upload_kitab_url
+            var riversRef = storageRef.child("kitab_pdf/${binding.uploadKitabName.text.toString() + FirebaseAuth.getInstance().uid}")
+            uploadTask = riversRef.putFile(file)
+            uploadTask.addOnFailureListener {
+                Toast.makeText(this, uploadTask.exception?.message,Toast.LENGTH_SHORT).show()
+                // Handle unsuccessful uploads
+            }.addOnSuccessListener { taskSnapshot ->
+                // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+                riversRef.downloadUrl.addOnSuccessListener{uri ->
+                    if (!binding.uploadKitabName.text.isEmpty()){
+                        var kitab = Kitab(binding.uploadKitabName.text.toString(),
+                            binding.uploadKitabDescription.text.toString(),
+                            FirebaseAuth.getInstance().uid.toString(),
+                            uri.toString(),
+                            LocalDateTime.now(),
+                            binding.uploadKitabLanguage.text.toString(),
+                            false)
+                        database.reference.child("kitab").child(database.reference.push().key.toString()).setValue(kitab)
+                            .addOnSuccessListener {
+                                Toast.makeText(this,"Kitab Uploaded for processing...",Toast.LENGTH_SHORT).show()
+                            }
+                    }
+                    else{
+                        Toast.makeText(this,"Kitab name is required...",Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == 101 && requestCode == RESULT_OK) {
-            if (data != null) {
-                upload_kitab_url = data.data.toString()
-            }
-        }
         super.onActivityResult(requestCode, resultCode, data)
+        if (data != null) {
+            upload_kitab_url = data.data!!
+        }
     }
 }
