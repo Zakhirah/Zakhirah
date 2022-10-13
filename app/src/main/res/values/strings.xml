@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Zakhirah</string>
+    <array name="state">
+        <item>Gujarat</item>
+        <item>Maharashtra</item>
+    </array>
+</resources>

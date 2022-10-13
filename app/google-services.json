@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "678620575567",
+    "firebase_url": "https://zakhirah-d1570-default-rtdb.firebaseio.com",
+    "project_id",: "zakhirah-d1570",
+    "storage_bucket": "zakhirah-d1570.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678620575567:android:5aba975a204b981ef1b73a",
+        "android_client_info": {
+          "package_name": "com.talaba.zakhirah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678620575567-cp5c644jgge2i5nvfr67hli7asgrncgk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGTd2xP0RaQVrk_VsZIHga-kDjT80r6YQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678620575567-cp5c644jgge2i5nvfr67hli7asgrncgk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

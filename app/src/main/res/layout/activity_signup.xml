@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="100dp"
+    android:layout_marginHorizontal="10dp"
+    android:gravity="center">
+    <EditText
+        android:id="@+id/signup_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Enter Your Name"/>
+    <EditText
+        android:id="@+id/signup_email"
+        android:inputType="textEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Email address"/>
+    <EditText
+        android:id="@+id/signup_phone"
+        android:inputType="phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Email address"/>
+    <Spinner
+        android:id="@+id/signup_state"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/state"
+        android:tooltipText="Choose your current state"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:id="@+id/signup_password"
+        android:hint="Enter your Password"/>
+    <EditText
+        android:id="@+id/signup_confirm_password"
+        android:layout_width="match_parent"
+        android:inputType="textPassword"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Your password"/>
+    <Button
+        android:id="@+id/signup_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign up"/>
+</LinearLayout>
+</ScrollView>
