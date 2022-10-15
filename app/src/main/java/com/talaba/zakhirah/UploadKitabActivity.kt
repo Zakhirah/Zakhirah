@@ -47,7 +47,7 @@ class UploadKitabActivity : AppCompatActivity() {
             uploadTask.addOnFailureListener {
                 Toast.makeText(this, uploadTask.exception?.message,Toast.LENGTH_SHORT).show()
                 // Handle unsuccessful uploads
-            }.addOnSuccessListener { taskSnapshot ->
+            }.addOnSuccessListener {
                 // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
                 riversRef.downloadUrl.addOnSuccessListener{uri ->
                     if (!binding.uploadKitabName.text.isEmpty()){

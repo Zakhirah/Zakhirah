@@ -2,6 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item android:title="Upload your kitab"
     android:id="@+id/menu_upload">
-
 </item>
+    <item android:title="Upload your category"
+        android:id="@+id/menu_category">
+    </item>
 </menu>
