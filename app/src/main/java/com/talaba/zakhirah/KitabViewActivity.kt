@@ -35,6 +35,19 @@ open class KitabViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityKitabViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        FirebaseDatabase.getInstance().reference
+            .child("kitab")
+            .child(intent.getStringExtra("id").toString())
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    supportActionBar?.title = snapshot.child("kitab_name").value.toString()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
 ////        Toast.makeText(this,        intent.getStringExtra("url"),Toast.LENGTH_SHORT).show()
 //      binding.web.settings.javaScriptEnabled
 ////        var pdf_url = "https://docs.google.com/gview?embedded=true&url=" + intent.getStringExtra("url")?.substringAfter("https://","")

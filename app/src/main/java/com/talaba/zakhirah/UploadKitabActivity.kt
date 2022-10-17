@@ -37,6 +37,7 @@ class UploadKitabActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUploadKitabBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = "Upload Kitab"
         database = FirebaseDatabase.getInstance()
         storage = FirebaseStorage.getInstance()
         reference = FirebaseStorage.getInstance().reference

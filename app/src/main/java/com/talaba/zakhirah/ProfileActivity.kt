@@ -23,6 +23,7 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.progressBarSaved.visibility = View.VISIBLE
         binding.progressBarUpload.visibility = View.VISIBLE
+        supportActionBar?.title = "Profile"
         FirebaseDatabase.getInstance().reference
             .child("users")
             .child(FirebaseAuth.getInstance().uid.toString())

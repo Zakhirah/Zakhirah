@@ -24,6 +24,7 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = "Sign Up"
         database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
         binding.signupSignup.setOnClickListener(View.OnClickListener {
