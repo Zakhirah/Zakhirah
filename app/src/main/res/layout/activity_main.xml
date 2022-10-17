@@ -6,16 +6,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/main_category"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/white"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/sample_funun">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="5dp">
+        <ImageView
+            android:id="@+id/main_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/profile"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/sample_funun">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+
 <androidx.recyclerview.widget.RecyclerView
     android:layout_gravity="center_horizontal"
     android:id="@+id/main_kitab"
@@ -23,7 +37,26 @@
     android:layout_height="wrap_content"
     tools:listitem="@layout/sample_kitab"
     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-    app:spanCount="2"
-    android:fadeScrollbars="true"
-    android:scrollbars="vertical"/>
+    app:spanCount="2"/>
+    <TextView
+        android:id="@+id/main_kitab_available"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No Kitabs Available"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:visibility="gone"/>
+    <ProgressBar
+        android:id="@+id/progress_Bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:indeterminate = "true"
+        android:layout_gravity="center"
+        android:max="100"
+        android:minWidth="200dp"
+        android:minHeight="50dp"
+        android:visibility="invisible"
+        android:progress="0"/>
 </LinearLayout>

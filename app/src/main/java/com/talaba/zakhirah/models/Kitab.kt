@@ -11,7 +11,8 @@ class Kitab {
     var kitab_upload_time by Delegates.notNull<Long>()
     lateinit var kitab_language : String
     var kitab_permission : Boolean = false
-
+    lateinit var kitab_category : String
+    public var kitab_id: String = "id"
     constructor()
     constructor(
         kitab_name: String,
@@ -20,7 +21,8 @@ class Kitab {
         kitab_url: String,
         kitab_upload_time: Long,
         kitab_language: String,
-        kitab_permission: Boolean
+        kitab_permission: Boolean,
+        kitab_category: String
     ) {
         this.kitab_name = kitab_name
         this.kitab_description = kitab_description
@@ -29,5 +31,6 @@ class Kitab {
         this.kitab_upload_time = kitab_upload_time
         this.kitab_language = kitab_language
         this.kitab_permission = kitab_permission
+        this.kitab_category = kitab_category
     }
 }

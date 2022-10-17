@@ -6,4 +6,6 @@
     <item android:title="Upload your category"
         android:id="@+id/menu_category">
     </item>
+    <item android:title="SignOut"
+        android:id="@+id/menu_signout"/>
 </menu>

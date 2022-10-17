@@ -29,11 +29,11 @@
         android:inputType="phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Email address"/>
+        android:hint="Enter Your Phone no."/>
     <Spinner
         android:id="@+id/signup_state"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
         android:entries="@array/state"
         android:tooltipText="Choose your current state"/>
     <EditText
@@ -53,5 +53,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign up"/>
+    <Button
+        android:id="@+id/signup_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Click for LogIn"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/purple_200"/>
 </LinearLayout>
 </ScrollView>

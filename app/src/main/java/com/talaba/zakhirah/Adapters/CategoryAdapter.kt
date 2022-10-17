@@ -1,5 +1,6 @@
 package com.talaba.zakhirah.Adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.text.method.Touch
@@ -31,6 +32,7 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
         return CategoryViewHolder(view)
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         var funun = Fununs?.get(position)
         holder.binding.fununFun.text = funun

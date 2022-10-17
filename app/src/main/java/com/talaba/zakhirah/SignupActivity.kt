@@ -12,7 +12,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.talaba.zakhirah.databinding.ActivitySignupBinding
 import com.talaba.zakhirah.models.User
-import java.time.LocalDateTime
+import java.util.*
 
 class SignupActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignupBinding
@@ -34,8 +34,8 @@ class SignupActivity : AppCompatActivity() {
                 )
                     .addOnSuccessListener {
                         var user =
-                            User(binding.signupUsername.text.toString(),binding.signupEmail.text.toString(),Integer.parseInt(binding.signupPhone.text.toString()),binding.signupConfirmPassword.text.toString(),binding.signupState.selectedItem.toString(),
-                               LocalDateTime.now())
+                            User(binding.signupUsername.text.toString(),binding.signupEmail.text.toString(),binding.signupPhone.text.toString(),binding.signupConfirmPassword.text.toString(),binding.signupState.selectedItem.toString(),
+                               Date().time)
                         database.reference.child("users")
                             .child(FirebaseAuth.getInstance().uid.toString()).setValue(user)
                             .addOnSuccessListener {
@@ -52,5 +52,8 @@ class SignupActivity : AppCompatActivity() {
                 Toast.makeText(this,"Password not matched",Toast.LENGTH_SHORT).show()
             }
         })
+        binding.signupLogin.setOnClickListener{
+            startActivity(Intent(this,LoginActivity::class.java))
+        }
     }
 }

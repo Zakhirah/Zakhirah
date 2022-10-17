@@ -14,6 +14,7 @@ import com.talaba.zakhirah.models.Kitab
 class KitabAdapter : RecyclerView.Adapter<KitabAdapter.KitabViewHolder> {
     var context: Context? = null
     var Kitabs: ArrayList<Kitab>? = null
+
     constructor(context: Context?, Kitabs: ArrayList<Kitab>?) {
         this.context = context
         this.Kitabs = Kitabs
@@ -31,6 +32,7 @@ class KitabAdapter : RecyclerView.Adapter<KitabAdapter.KitabViewHolder> {
             var intent = Intent(context,KitabViewActivity::class.java)
             if (kitab != null) {
                 intent.putExtra("url",kitab.kitab_url)
+                intent.putExtra("id",kitab.kitab_id)
             }
             context?.startActivity(intent)
         }

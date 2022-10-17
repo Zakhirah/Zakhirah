@@ -4,11 +4,16 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
@@ -17,6 +22,7 @@ import com.talaba.zakhirah.models.Kitab
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.util.*
+import kotlin.collections.ArrayList
 
 class UploadKitabActivity : AppCompatActivity() {
     lateinit var binding: ActivityUploadKitabBinding
@@ -24,6 +30,8 @@ class UploadKitabActivity : AppCompatActivity() {
     lateinit var storage:FirebaseStorage
     lateinit var reference:StorageReference
     lateinit var upload_kitab_url :Uri
+    lateinit var list: ArrayList<String>
+    lateinit var adapter: ArrayAdapter<String>
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +47,7 @@ class UploadKitabActivity : AppCompatActivity() {
             startActivityForResult(intent, 101)
         }
         binding.uploadKitabUpload.setOnClickListener{
+            binding.progressBar.visibility = View.VISIBLE
             var uploadTask : UploadTask
             var storageRef : StorageReference = FirebaseStorage.getInstance().getReference()
             var file = upload_kitab_url
@@ -58,9 +67,13 @@ class UploadKitabActivity : AppCompatActivity() {
                             uri.toString(),
                             date.time,
                             binding.uploadKitabLanguage.text.toString(),
-                            false)
-                        database.reference.child("kitab").child(database.reference.push().key.toString()).setValue(kitab)
+                            false,
+                            binding.uploadKitabCategory.selectedItem.toString())
+                        database.reference.child("kitab")
+                            .child(database.reference.push().key.toString())
+                            .setValue(kitab)
                             .addOnSuccessListener {
+                                binding.progressBar.visibility = View.GONE
                                 Toast.makeText(this,"Kitab Uploaded for processing...",Toast.LENGTH_SHORT).show()
                                 startActivity(Intent(applicationContext,MainActivity::class.java))
                             }
@@ -71,6 +84,24 @@ class UploadKitabActivity : AppCompatActivity() {
                 }
             }
         }
+        list = ArrayList()
+        adapter = ArrayAdapter(this, com.google.android.material.R.layout.support_simple_spinner_dropdown_item,list)
+        binding.uploadKitabCategory.adapter = adapter
+        database.reference.child("category")
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()){
+                        for(snapshot1 in snapshot.children)
+                            list.add(snapshot1.key.toString())
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
     }
 
     @Deprecated("Deprecated in Java")
