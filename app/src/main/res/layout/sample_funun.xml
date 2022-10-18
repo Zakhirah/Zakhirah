@@ -13,6 +13,7 @@
         android:backgroundTint="@color/white"
         android:textColor="@color/black"
         android:textAllCaps="false"
+        android:tag="0"
         app:cornerRadius="25dp"
         android:text="@string/app_name"/>
 </LinearLayout>

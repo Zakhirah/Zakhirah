@@ -9,6 +9,7 @@ import android.os.Environment
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -21,6 +22,7 @@ import com.shockwave.pdfium.PdfiumCore
 import com.talaba.zakhirah.Adapters.CategoryAdapter
 import com.talaba.zakhirah.Adapters.KitabAdapter
 import com.talaba.zakhirah.databinding.ActivityMainBinding
+import com.talaba.zakhirah.databinding.SampleFununBinding
 import com.talaba.zakhirah.models.Kitab
 
 
@@ -42,11 +44,10 @@ class MainActivity : AppCompatActivity() {
         main_adapter = KitabAdapter(this, kitabs)
         binding.mainKitab.adapter = main_adapter
         var ori = resources.configuration.orientation
-        if (ori == Configuration.ORIENTATION_LANDSCAPE ) {
-            binding.mainKitab.layoutManager = GridLayoutManager(this, 4)
-        }
-        else
-            binding.mainKitab.layoutManager = GridLayoutManager(this, 2)
+        if (ori == Configuration.ORIENTATION_LANDSCAPE) {
+                binding.mainKitab.layoutManager = GridLayoutManager(this, 4)
+            } else
+                binding.mainKitab.layoutManager = GridLayoutManager(this, 2)
         binding.mainCategory.adapter = main_adapter_category
         database.reference.child("category")
             .addValueEventListener(object : ValueEventListener{
@@ -61,7 +62,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
                 }
 
             })

@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.loader.content.Loader
 import androidx.recyclerview.widget.RecyclerView
 import com.github.barteksc.pdfviewer.PDFView
@@ -32,7 +33,6 @@ import javax.net.ssl.HttpsURLConnection
 class KitabAdapter : RecyclerView.Adapter<KitabAdapter.KitabViewHolder> {
     var context: Context? = null
     var Kitabs: ArrayList<Kitab>? = null
-
     constructor(context: Context?, Kitabs: ArrayList<Kitab>?) {
         this.context = context
         this.Kitabs = Kitabs
@@ -42,7 +42,7 @@ class KitabAdapter : RecyclerView.Adapter<KitabAdapter.KitabViewHolder> {
         return KitabViewHolder(view)
     }
     override fun onBindViewHolder(holder: KitabViewHolder, position: Int) {
-        var kitab = Kitabs?.get(position)
+        var kitab:Kitab = Kitabs?.get(position)!!
         if (kitab != null) {
             holder.binding.kitabName.text = kitab.kitab_name
         }
