@@ -1,8 +1,10 @@
 package com.talaba.zakhirah
 
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -16,14 +18,15 @@ import com.talaba.zakhirah.models.User
 
 class ProfileActivity : AppCompatActivity() {
     lateinit var binding: ActivityProfileBinding
-    lateinit var uploadedkitabs:ArrayList<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.progressBarSaved.visibility = View.VISIBLE
         binding.progressBarUpload.visibility = View.VISIBLE
         supportActionBar?.title = "Profile"
+        binding.scrollView.isSmoothScrollingEnabled
         FirebaseDatabase.getInstance().reference
             .child("users")
             .child(FirebaseAuth.getInstance().uid.toString())
@@ -47,6 +50,11 @@ class ProfileActivity : AppCompatActivity() {
         var kitabsSaved = ArrayList<Kitab>()
         var adapter = KitabAdapter(this,kitabsSaved)
         binding.profileSaved.adapter = adapter
+        var ori1 = resources.configuration.orientation
+        if (ori1 == Configuration.ORIENTATION_LANDSCAPE )
+            binding.profileSaved.layoutManager = GridLayoutManager(this,2)
+        else
+            binding.profileSaved.layoutManager = GridLayoutManager(this,1)
         FirebaseDatabase.getInstance().reference
             .child("users")
             .child(FirebaseAuth.getInstance().uid.toString())
@@ -94,6 +102,11 @@ class ProfileActivity : AppCompatActivity() {
         var kitabsUpload = ArrayList<Kitab>()
         var adapterup = KitabAdapter(this,kitabsUpload)
         binding.profileUploaded.adapter = adapterup
+        var ori = resources.configuration.orientation
+        if (ori == Configuration.ORIENTATION_LANDSCAPE )
+        binding.profileUploaded.layoutManager = GridLayoutManager(this,2)
+        else
+            binding.profileUploaded.layoutManager = GridLayoutManager(this,1)
         FirebaseDatabase.getInstance().reference
             .child("kitab")
             .addValueEventListener(object :ValueEventListener{
@@ -124,5 +137,10 @@ class ProfileActivity : AppCompatActivity() {
                     TODO("Not yet implemented")
                 }
             })
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

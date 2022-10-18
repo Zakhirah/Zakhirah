@@ -1,6 +1,7 @@
 package com.talaba.zakhirah
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -39,6 +41,12 @@ class MainActivity : AppCompatActivity() {
         main_adapter_category = CategoryAdapter(this, fununs)
         main_adapter = KitabAdapter(this, kitabs)
         binding.mainKitab.adapter = main_adapter
+        var ori = resources.configuration.orientation
+        if (ori == Configuration.ORIENTATION_LANDSCAPE ) {
+            binding.mainKitab.layoutManager = GridLayoutManager(this, 4)
+        }
+        else
+            binding.mainKitab.layoutManager = GridLayoutManager(this, 2)
         binding.mainCategory.adapter = main_adapter_category
         database.reference.child("category")
             .addValueEventListener(object : ValueEventListener{

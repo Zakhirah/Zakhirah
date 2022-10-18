@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     tools:context=".ProfileActivity">
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -103,8 +107,8 @@
                     android:id="@+id/profile_saved"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    tools:listitem="@layout/sample_kitab"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                    android:layout_marginBottom="3dp"
+                    tools:listitem="@layout/sample_kitab"/>
                 <TextView
                     android:id="@+id/profile_saved_text"
                     android:layout_width="wrap_content"
@@ -150,8 +154,8 @@
                     android:id="@+id/profile_uploaded"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    tools:listitem="@layout/sample_kitab"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                    android:layout_marginBottom="3dp"
+                    tools:listitem="@layout/sample_kitab"/>
                 <TextView
                     android:id="@+id/profile_upload_text"
                     android:visibility="gone"
@@ -179,5 +183,6 @@
         </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

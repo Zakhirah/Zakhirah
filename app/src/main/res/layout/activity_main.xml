@@ -35,9 +35,7 @@
     android:id="@+id/main_kitab"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:listitem="@layout/sample_kitab"
-    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-    app:spanCount="2"/>
+    tools:listitem="@layout/sample_kitab" />
     <TextView
         android:id="@+id/main_kitab_available"
         android:layout_width="match_parent"
@@ -57,6 +55,6 @@
         android:max="100"
         android:minWidth="200dp"
         android:minHeight="50dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:progress="0"/>
 </LinearLayout>

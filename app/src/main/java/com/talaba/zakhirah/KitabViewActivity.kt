@@ -1,14 +1,14 @@
 package com.talaba.zakhirah
 
-import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.barteksc.pdfviewer.PDFView
-import com.github.barteksc.pdfviewer.listener.OnErrorListener
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -16,16 +16,12 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.talaba.zakhirah.databinding.ActivityKitabViewBinding
-import kotlinx.coroutines.flow.combine
 import java.io.BufferedInputStream
-import java.io.IOException
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
 import javax.net.ssl.HttpsURLConnection
-import kotlin.collections.ArrayList
-import kotlin.properties.Delegates
 
 
 open class KitabViewActivity : AppCompatActivity() {
@@ -64,13 +60,15 @@ open class KitabViewActivity : AppCompatActivity() {
 //            .onError(OnErrorListener {
 //                Toast.makeText(this,it.message,Toast.LENGTH_LONG).show()
 //            })
-        RetrievePDFFromURL(binding.kitabViewPdfview).execute(intent.getStringExtra("url"))
+        RetrievePDFFromURL(binding.kitabViewPdfview,binding).execute(intent.getStringExtra("url"))
+        binding.progressBar.visibility = View.VISIBLE
     }
-    class RetrievePDFFromURL(pdfView: PDFView) :
+    class RetrievePDFFromURL(pdfView: PDFView,binding: ActivityKitabViewBinding) :
         AsyncTask<String, Void, InputStream>() {
 
         // on below line we are creating a variable for our pdf view.
         val mypdfView: PDFView = pdfView
+        var binding = binding
 
         // on below line we are calling our do in background method.
         override fun doInBackground(vararg params: String?): InputStream? {
@@ -109,7 +107,11 @@ open class KitabViewActivity : AppCompatActivity() {
         override fun onPostExecute(result: InputStream?) {
             // on below line we are loading url within our
             // pdf view on below line using input stream.
-            mypdfView.fromStream(result).load()
+            mypdfView.fromStream(result)
+                .onLoad(OnLoadCompleteListener {
+                    binding.progressBar.visibility = View.GONE
+                })
+                .load()
 
         }
     }

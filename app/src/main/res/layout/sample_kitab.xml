@@ -26,15 +26,35 @@
             app:cardCornerRadius="15dp"
             android:layout_gravity="center_horizontal"
             >
-
-            <ImageView
+            <com.github.barteksc.pdfviewer.PDFView
                 android:id="@+id/kitab_thumbnail"
                 android:layout_width="150dp"
                 android:layout_height="230dp"
+                android:tag="0"
                 android:scaleType="centerCrop"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"/>
+            <ProgressBar
+                android:id="@+id/kitab_progress_Bar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:max="100"
+                android:minWidth="200dp"
+                android:minHeight="50dp"
+                android:progress="0"
+                app:layout_constraintBottom_toBottomOf="@id/linearLayout"
+                app:layout_constraintTop_toTopOf="@id/linearLayout"
+                app:layout_constraintRight_toRightOf="@id/linearLayout"
+                app:layout_constraintLeft_toLeftOf="@id/linearLayout"/>
+            <ImageView
+                android:id="@+id/kitab_refresh_thumbnail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/refresh"
+                android:layout_gravity="bottom"/>
         </androidx.cardview.widget.CardView>
-
         <TextView
             android:id="@+id/kitab_name"
             android:layout_width="wrap_content"
