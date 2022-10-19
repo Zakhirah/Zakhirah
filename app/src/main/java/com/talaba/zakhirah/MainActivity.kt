@@ -31,12 +31,14 @@ class MainActivity : AppCompatActivity() {
     lateinit var database: FirebaseDatabase
     lateinit var kitabs : ArrayList<Kitab>
     lateinit var fununs : ArrayList<String>
+    lateinit var main_adapter : KitabAdapter
+    var cat :String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         database = FirebaseDatabase.getInstance()
-        var main_adapter : KitabAdapter
         kitabs = ArrayList()
         var main_adapter_category : CategoryAdapter
         fununs = ArrayList()
@@ -118,6 +120,4 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         finishAffinity()
     }
-
-
 }
