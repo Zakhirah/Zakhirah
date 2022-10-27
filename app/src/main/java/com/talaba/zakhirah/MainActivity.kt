@@ -2,14 +2,11 @@ package com.talaba.zakhirah
 
 import android.content.Intent
 import android.content.res.Configuration
-import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -17,13 +14,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.shockwave.pdfium.PdfDocument
-import com.shockwave.pdfium.PdfiumCore
 import com.talaba.zakhirah.Adapters.CategoryAdapter
 import com.talaba.zakhirah.Adapters.KitabAdapter
 import com.talaba.zakhirah.databinding.ActivityMainBinding
-import com.talaba.zakhirah.databinding.SampleFununBinding
 import com.talaba.zakhirah.models.Kitab
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -68,8 +63,43 @@ class MainActivity : AppCompatActivity() {
 
             })
         binding.progressBar.visibility = View.VISIBLE
-        database.reference.child("kitab")
-            .addValueEventListener( object : ValueEventListener{
+//        database.reference.child("kitab")
+//            .addValueEventListener( object : ValueEventListener{
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    kitabs.clear()
+//                    if (snapshot.exists()) {
+//                        binding.progressBar.visibility = View.GONE
+//                        for (snapshot1 in snapshot.children) {
+//                            var kitab : Kitab = snapshot1.getValue(Kitab::class.java)!!
+//                            kitab.kitab_id = snapshot1.key.toString()
+//                            kitabs.add(kitab)
+//                        }
+//                        main_adapter.notifyDataSetChanged()
+//                    }
+//                    else{
+//                        binding.progressBar.visibility =View.GONE
+//                        binding.mainKitab.visibility = View.GONE
+//                        binding.mainKitabAvailable.visibility = View.VISIBLE
+//                    }
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {
+//
+//                }
+//            }
+//                )
+        binding.mainProfile.setOnClickListener{
+            startActivity(Intent(this,ProfileActivity::class.java))
+        }
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu,menu)
+        val item = menu!!.findItem(R.id.menu_search)
+        val searchBar = item.actionView as androidx.appcompat.widget.SearchView
+        if (database.reference != null) {
+            database.reference.child("kitab").addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     kitabs.clear()
                     if (snapshot.exists()) {
@@ -80,6 +110,7 @@ class MainActivity : AppCompatActivity() {
                             kitabs.add(kitab)
                         }
                         main_adapter.notifyDataSetChanged()
+                        searchBar.queryHint = "Search among " + kitabs.size +" kitabs"
                     }
                     else{
                         binding.progressBar.visibility =View.GONE
@@ -88,20 +119,39 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-            }
-                )
-        binding.mainProfile.setOnClickListener{
-            startActivity(Intent(this,ProfileActivity::class.java))
+                override fun onCancelled(error: DatabaseError) {}
+            })
         }
+        if (searchBar != null) {
+            searchBar.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    return false
+                }
 
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu,menu)
+                override fun onQueryTextChange(newText: String): Boolean {
+                    search(newText)
+                    return false
+                }
+            })
+        }
         return super.onCreateOptionsMenu(menu)
+    }
+    private fun search(newText: String) {
+        val searched_kitab: ArrayList<Kitab> = ArrayList<Kitab>()
+        for (`object` in kitabs) {
+            if (`object`.kitab_name.lowercase().contains(newText.lowercase(Locale.getDefault()))) {
+                searched_kitab.add(`object`)
+                binding.mainKitabAvailable.visibility = View.GONE
+                binding.mainKitab.visibility = View.VISIBLE
+            }
+        }
+        if (searched_kitab.isEmpty()){
+            binding.mainKitabAvailable.visibility = View.VISIBLE
+            binding.mainKitab.visibility = View.GONE
+        }
+        val adapter = KitabAdapter(this, searched_kitab)
+        adapter.notifyDataSetChanged()
+        binding.mainKitab.adapter = adapter
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -113,6 +163,9 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_signout ->{
                 FirebaseAuth.getInstance().signOut()
                 startActivity(Intent(this,LoginActivity::class.java))
+            }
+            R.id.menu_search ->{
+
             }
         }
         return super.onOptionsItemSelected(item)
