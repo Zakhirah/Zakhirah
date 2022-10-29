@@ -15,16 +15,11 @@ import androidx.loader.content.Loader
 import androidx.recyclerview.widget.RecyclerView
 import com.github.barteksc.pdfviewer.PDFView
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
-import com.github.barteksc.pdfviewer.listener.OnTapListener
-import com.shockwave.pdfium.PdfDocument
-import com.shockwave.pdfium.PdfiumCore
 import com.talaba.zakhirah.KitabViewActivity
 import com.talaba.zakhirah.R
 import com.talaba.zakhirah.databinding.SampleKitabBinding
 import com.talaba.zakhirah.models.Kitab
 import java.io.BufferedInputStream
-import java.io.File
-import java.io.FileOutputStream
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
