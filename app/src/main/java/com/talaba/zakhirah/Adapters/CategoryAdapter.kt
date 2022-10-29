@@ -1,14 +1,11 @@
 package com.talaba.zakhirah.Adapters
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Configuration
 import android.view.*
 import android.widget.ImageView
 import android.widget.PopupWindow
-import android.widget.SearchView
 import android.widget.TextView
-import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot

@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.inappmessaging.model.InAppMessage
 import com.talaba.zakhirah.Adapters.CategoryAdapter
 import com.talaba.zakhirah.Adapters.KitabAdapter
 import com.talaba.zakhirah.databinding.ActivityMainBinding
@@ -27,8 +28,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var kitabs : ArrayList<Kitab>
     lateinit var fununs : ArrayList<String>
     lateinit var main_adapter : KitabAdapter
-    var cat :String = ""
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -63,31 +62,6 @@ class MainActivity : AppCompatActivity() {
 
             })
         binding.progressBar.visibility = View.VISIBLE
-//        database.reference.child("kitab")
-//            .addValueEventListener( object : ValueEventListener{
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    kitabs.clear()
-//                    if (snapshot.exists()) {
-//                        binding.progressBar.visibility = View.GONE
-//                        for (snapshot1 in snapshot.children) {
-//                            var kitab : Kitab = snapshot1.getValue(Kitab::class.java)!!
-//                            kitab.kitab_id = snapshot1.key.toString()
-//                            kitabs.add(kitab)
-//                        }
-//                        main_adapter.notifyDataSetChanged()
-//                    }
-//                    else{
-//                        binding.progressBar.visibility =View.GONE
-//                        binding.mainKitab.visibility = View.GONE
-//                        binding.mainKitabAvailable.visibility = View.VISIBLE
-//                    }
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//
-//                }
-//            }
-//                )
         binding.mainProfile.setOnClickListener{
             startActivity(Intent(this,ProfileActivity::class.java))
         }
