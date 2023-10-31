@@ -7,13 +7,25 @@
         <entry key="..\:/BCA/ANDROID/Zakhirah/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/BCA/ANDROID/Zakhirah/app/src/main/res/layout/activity_signup.xml" value="0.22447916666666667" />
         <entry key="..\:/BCA/ANDROID/Zakhirah/app/src/main/res/layout/sample_funun.xml" value="0.2234375" />
+        <entry key="..\:/Start_up_Projects/Zakhirah/app/src/main/res/drawable-v24/textbox_outline.xml" value="0.1385" />
+        <entry key="..\:/Start_up_Projects/Zakhirah/app/src/main/res/drawable/profile.xml" value="0.1385" />
+        <entry key="..\:/Start_up_Projects/Zakhirah/app/src/main/res/drawable/search_icon.xml" value="0.1455" />
+        <entry key="..\:/Start_up_Projects/Zakhirah/app/src/main/res/layout/activity_kitab_view.xml" value="0.22447916666666667" />
         <entry key="..\:/Start_up_Projects/Zakhirah/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/Start_up_Projects/Zakhirah/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Start_up_Projects/Zakhirah/app/src/main/res/layout/activity_profile.xml" value="0.26795580110497236" />
         <entry key="..\:/Start_up_Projects/Zakhirah/app/src/main/res/layout/activity_signup.xml" value="0.25" />
+        <entry key="..\:/Start_up_Projects/Zakhirah/app/src/main/res/layout/activity_upload_category.xml" value="0.2234375" />
+        <entry key="..\:/Start_up_Projects/Zakhirah/app/src/main/res/layout/activity_upload_kitab.xml" value="0.22447916666666667" />
+        <entry key="..\:/Start_up_Projects/Zakhirah/app/src/main/res/layout/category_sorted_kitabs.xml" value="0.5" />
         <entry key="..\:/Start_up_Projects/Zakhirah/app/src/main/res/layout/sample_funun.xml" value="0.18229166666666666" />
+        <entry key="..\:/Start_up_Projects/Zakhirah/app/src/main/res/layout/sample_kitab.xml" value="0.5" />
+        <entry key="..\:/Start_up_Projects/Zakhirah/app/src/main/res/menu/kitab_menu.xml" value="0.22447916666666667" />
+        <entry key="..\:/Start_up_Projects/Zakhirah/app/src/main/res/menu/menu.xml" value="0.22447916666666667" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

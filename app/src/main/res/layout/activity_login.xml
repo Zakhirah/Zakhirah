@@ -26,11 +26,13 @@
             android:id="@+id/signin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign up"/>
-        <TextView
+            android:text="Log In"/>
+        <Button
             android:id="@+id/signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Signop now"/>
+            android:textAllCaps="false"
+            android:text="Click for Sign Up"
+            android:backgroundTint="@color/purple_200"/>
     </LinearLayout>
 </ScrollView>
