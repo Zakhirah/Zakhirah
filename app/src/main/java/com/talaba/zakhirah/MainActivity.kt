@@ -3,10 +3,10 @@ package com.talaba.zakhirah
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -14,7 +14,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.inappmessaging.model.InAppMessage
 import com.talaba.zakhirah.Adapters.CategoryAdapter
 import com.talaba.zakhirah.Adapters.KitabAdapter
 import com.talaba.zakhirah.databinding.ActivityMainBinding
@@ -34,9 +33,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         database = FirebaseDatabase.getInstance()
         kitabs = ArrayList()
-        var main_adapter_category : CategoryAdapter
         fununs = ArrayList()
-        main_adapter_category = CategoryAdapter(this, fununs)
+        var main_adapter_category : CategoryAdapter = CategoryAdapter(this, fununs)
         main_adapter = KitabAdapter(this, kitabs)
         binding.mainKitab.adapter = main_adapter
         var ori = resources.configuration.orientation
@@ -58,10 +56,12 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
+                    Log.d("Errors",error.message)
+
                 }
 
             })
-        binding.progressBar.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.GONE
         binding.mainProfile.setOnClickListener{
             startActivity(Intent(this,ProfileActivity::class.java))
         }
